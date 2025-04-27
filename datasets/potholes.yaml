@@ -1,0 +1,5 @@
+train: /Users/julio.c.gomez.valdez/Documents/CodigoIA/PotholeDetection/datasets/images/train
+val: /Users/julio.c.gomez.valdez/Documents/CodigoIA/PotholeDetection/datasets/images/val
+
+nc: 1
+names: ['pothole']

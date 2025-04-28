@@ -32,6 +32,7 @@ PotholeDetection/
 ├── train_pro_template.py    # Training script
 ├── requirements.txt         # Python dependencies
 └── README.md                # Project documentation
+
 ## Run
 ```
 python main.py

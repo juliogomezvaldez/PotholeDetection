@@ -19,7 +19,19 @@ Install dependencies:
 ```
 pip install -r requirements.txt
 ```
-
+## Project Structure
+Project Structure:
+```
+PotholeDetection/
+├── datasets/                # Training datasets and annotations
+├── runs/                    # Training and inference results
+├── models/                  # Trained YOLOv9s models (.pt files)
+├── inference/               # Inference scripts for videos, images, etc.
+│   └── detect_potholes_video_yolov9s.py
+├── utils/                   # Helper scripts (optional)
+├── train_pro_template.py    # Training script
+├── requirements.txt         # Python dependencies
+└── README.md                # Project documentation
 ## Run
 ```
 python main.py

@@ -19,19 +19,55 @@ Install dependencies:
 ```
 pip install -r requirements.txt
 ```
-## Project Structure
-Project Structure:
+
+## 📂 Project Structure
+
 ```
 PotholeDetection/
-├── datasets/                # Training datasets and annotations
-├── runs/                    # Training and inference results
-├── models/                  # Trained YOLOv9s models (.pt files)
-├── inference/               # Inference scripts for videos, images, etc.
-│   └── detect_potholes_video_yolov9s.py
-├── utils/                   # Helper scripts (optional)
-├── train_pro_template.py    # Training script
-├── requirements.txt         # Python dependencies
-└── README.md                # Project documentation
+├── datasets/            # Dataset for training
+├── detections/           # Images and detection data (generated in real-time)
+├── models/               # Trained YOLOv9 models
+├── notebooks/            # Experimentation notebooks
+├── realtime/             # Real-time detection scripts
+│   └── detect_realtime.py
+├── requirements.txt      # Python dependencies
+├── start_container.sh    # Training startup script
+├── start_realtime.sh     # Real-time detection startup script
+├── train_pro_template.py # Training template
+```
+
+---
+
+## 🚀 Main Scripts
+
+### 1. `start_container.sh`
+
+- **What does it do?**
+  - Launches a Docker container with GPU for **training tasks**.
+  - Installs required dependencies.
+
+- **How to use it?**
+
+```bash
+chmod +x start_container.sh
+./start_container.sh
+```
+
+### 2. `start_realtime.sh`
+
+- **What does it do?**
+  - Launches a Docker container with GPU for **real-time pothole detection**.
+  - Automatically runs the script `realtime/detect_realtime.py`.
+
+- **How to use it?**
+
+```bash
+chmod +x start_realtime.sh
+./start_realtime.sh
+```
+
+---
+
 
 ## Run
 ```

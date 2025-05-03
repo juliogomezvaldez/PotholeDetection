@@ -6,53 +6,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    #map { height: 100vh; }
+    body { margin: 0; font-family: sans-serif; }
+    #controls { padding: 10px; background: #f8f8f8; }
+    #map { height: calc(100vh - 50px); }
   </style>
 </head>
 <body>
+
+  <div id="controls">
+    <label for="geojsonSelect">Selecciona fecha:</label>
+    <select id="geojsonSelect">
+      <option value="">-- Selecciona --</option>
+      <option value="2025-04-29">2025-04-29</option>
+      <option value="2025-05-03">2025-05-03</option>
+      <!-- Agrega más fechas aquí si hay más .geojson -->
+    </select>
+  </div>
+
   <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map').setView([19.4326, -99.1332], 13);  // Ciudad de México
+    const map = L.map('map').setView([24.0, -110.3], 13); // Vista inicial general (La Paz)
+    let layerGroup = null;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    fetch('detections/2025-04-29/detections_2025-04-29.geojson')
-      .then(res => res.json())
-      .then(data => {
-        L.geoJSON(data, {
-          onEachFeature: function (feature, layer) {
-            const props = feature.properties;
-            let popup = `<b>Timestamp:</b> ${props.timestamp || ''}<br>`;
-            popup += `<b>Confidence:</b> ${props.confidence || ''}<br>`;
-            if (props.image_url) {
-              popup += `<img src="${props.image_url}" width="200"/>`;
-            }
-            layer.bindPopup(popup);
-          },
-          pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-              radius: 8,
-              fillColor: feature.properties["marker-color"] || "#3388ff",
-              color: "#000",
-              weight: 1,
-              opacity: 1,
-              fillOpacity: 0.8
-            });
-          },
-          style: function (feature) {
-            if (feature.geometry.type === "LineString") {
-              return {
-                color: "#0000ff",
-                weight: 3
-              };
-            }
+    const select = document.getElementById('geojsonSelect');
+
+    select.addEventListener('change', function () {
+      const date = this.value;
+      if (!date) return;
+
+      const path = `detection/${date}/detection_${date}.geojson`;
+
+      fetch(path)
+        .then(res => res.json())
+        .then(data => {
+          if (layerGroup) {
+            map.removeLayer(layerGroup);
           }
-        }).addTo(map);
-      });
+
+          layerGroup = L.geoJSON(data, {
+            onEachFeature: function (feature, layer) {
+              const props = feature.properties;
+              let popup = `<b>Timestamp:</b> ${props.timestamp || ''}<br>`;
+              popup += `<b>Confidence:</b> ${props.confidence || ''}<br>`;
+              if (props.image_url) {
+                popup += `<img src="${props.image_url}" width="200"/>`;
+              }
+              layer.bindPopup(popup);
+            },
+            pointToLayer: function (feature, latlng) {
+              return L.circleMarker(latlng, {
+                radius: 8,
+                fillColor: feature.properties["marker-color"] || "#3388ff",
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+              });
+            },
+            style: function (feature) {
+              if (feature.geometry.type === "LineString") {
+                return {
+                  color: "#0000ff",
+                  weight: 3
+                };
+              }
+            }
+          }).addTo(map);
+
+          // Auto-zoom to loaded features
+          map.fitBounds(layerGroup.getBounds(), { padding: [30, 30] });
+        })
+        .catch(err => {
+          alert("No se pudo cargar el archivo GeoJSON.");
+          console.error(err);
+        });
+    });
   </script>
 </body>
 </html>

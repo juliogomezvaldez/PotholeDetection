@@ -21,6 +21,7 @@ sudo docker run --runtime nvidia -it --rm --shm-size=8g \
     else
         echo '⚠️  Archivo requirements.txt no encontrado. Instalando paquetes individuales...'; 
         pip install --no-cache-dir py-cpuinfo tqdm opencv-python kiwisolver fonttools cycler contourpy matplotlib ultralytics-thop seaborn ultralytics;
+        
     fi
 
     echo '🟢 Dependencias instaladas correctamente.';
@@ -34,3 +35,4 @@ sudo docker run --runtime nvidia -it --rm --shm-size=8g \
     echo '🚀 Iniciando entrenamiento...'; 
     python3 train_pro_template.py --epochs 100 --batch 16 --imgsz 640 --workers 0 --cache disk --device 0 --project runs/train --name pothole_yolov9_pro --optimizer auto --verbose
 "
+pip install --no-cache-dir pyserial py-cpuinfo tqdm opencv-python kiwisolver fonttools cycler contourpy matplotlib ultralytics-thop seaborn ultralytics;

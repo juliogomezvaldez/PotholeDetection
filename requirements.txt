@@ -3,3 +3,4 @@ torch
 ultralytics
 pyserial
 geopy
+pandas==1.3.5

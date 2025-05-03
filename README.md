@@ -53,8 +53,10 @@ model.train(
     device='cuda' 
 )
 
-## 📂 Project Structure
 
+
+```
+##  Project Structure
 ```
 PotholeDetection/
 ├── datasets/            # Dataset for training
@@ -69,10 +71,10 @@ PotholeDetection/
 ├── train_pro_template.py # Training template
 ```
 
----
 
-## 🚀 Main Scripts
 
+##  Main Scripts
+```
 ### 1. `start_container.sh`
 
 - **What does it do?**

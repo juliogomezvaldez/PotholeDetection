@@ -19,9 +19,44 @@ Install dependencies:
 ```
 pip install -r requirements.txt
 ```
+##  Dataset
 
-## 📂 Project Structure
+- **Name**: Pothole Detection  
+- **Author**: Andrew Mvd  
+- **Source**: [Kaggle - Pothole Detection](https://www.kaggle.com/datasets/andrewmvd/pothole-detection)  
+- **License**: Publicly available for educational and research use
 
+The dataset was restructured into the YOLO format with `train/` and `val/` image folders and corresponding annotation files.
+
+##  Model
+
+- **Base model**: `yolov9s.pt`
+- **Framework**: [Ultralytics YOLO](https://docs.ultralytics.com/)
+- **Training epochs**: 100
+- **Image size**: 640×640
+- **Batch size**: 16
+- **Device**: CUDA (GPU)
+
+##  Training Example
+
+```python
+from ultralytics import YOLO
+
+model = YOLO('yolov9s.pt')
+model.train(
+    data='datasets/potholes.yaml',
+    epochs=100,
+    imgsz=640,
+    batch=16,
+    name='pothole_yolov9',
+    exist_ok=True,
+    device='cuda' 
+)
+
+
+
+```
+##  Project Structure
 ```
 PotholeDetection/
 ├── datasets/            # Dataset for training
@@ -36,10 +71,10 @@ PotholeDetection/
 ├── train_pro_template.py # Training template
 ```
 
----
 
-## 🚀 Main Scripts
 
+##  Main Scripts
+```
 ### 1. `start_container.sh`
 
 - **What does it do?**

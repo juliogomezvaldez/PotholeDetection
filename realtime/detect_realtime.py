@@ -8,7 +8,7 @@ import json
 from ultralytics import YOLO  # Load YOLO model
 
 # === CONFIGURATION ===
-YOLO_MODEL_PATH = "Users/julio.c.gomez.valdez/Documents/CodigoIA/PotholeDetection/runs/train/pothole_yolov913/weights/best.pt"  # Example: "runs/train/pothole_yolov9/weights/best.pt"
+YOLO_MODEL_PATH = "Users/julio.c.gomez.valdez/Documents/CodigoIA/PotholeDetection/runs/train/pothole_yolov912/weights/best.pt"  # Example: "runs/train/pothole_yolov9/weights/best.pt"
 YOLO_CONFIDENCE_THRESHOLD = 0.5
 DETECTIONS_FOLDER = "detection"
 GPS_SERIAL_PORT = "/dev/ttyUSB0"  # Adjust according to your GPS port

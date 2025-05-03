@@ -1,4 +1,8 @@
+
+# Dataset: https://www.kaggle.com/datasets/andrewmvd/pothole-detection
+# Autor: Andrew Mvd
 train: images/train
 val: images/val
+
 nc: 1
 names: ['pothole']
